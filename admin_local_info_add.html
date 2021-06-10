@@ -1,0 +1,55 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Local Info Add{% endblock %}
+{% block body %}
+<center>
+    <h2><font color="#366092">Local Info Add</font></h2>
+<div class="container">
+    <form name="frm" role="form" action="{% url 'admin_local_info_add' %}" method="post">
+            {% csrf_token %}
+        <table>
+	        <div class="form-group">
+				<label for="info_name">Name</label>
+				    <input class="form-control" id="info_name" type="text"  name="info_name" placeholder="info name" required="required">
+			</div>
+            <div class="form-group">
+				<label for="info_descp">Loc Decription</label>
+				    <input class="form-control" id="info_descp" type="text"  name="info_descp" placeholder="description" required="required">
+			</div>
+            <div class="form-group">
+				<label for="geo_cache_id">Geo Cache</label>
+             	    <select class="form-control" id="geo_cache_id"  name="geo_cache_id">
+		            {% for  c in geo_list%}
+		        	    <option value="{{c.id}}">{{c.loc_name}}</option>
+		            {% endfor %}
+		            </select>
+			</div>
+            <div class="form-group">
+				<label for="sub_category_id">Category</label>
+             	    <select class="form-control" class="form-control" id="sub_category_id"  name="sub_category_id">
+		            {% for  c in subcategory_list%}
+		        	    <option value="{{c.id}}">{{c.sub_category_name}}</option>
+		            {% endfor %}
+		            </select>
+			</div>
+	        <div class="form-group">
+				<label for="lat">Lat/Lng</label>
+				    <input class="form-control" id="lat" type="text"  name="lat" placeholder="lat" required="required">
+				    <input class="form-control" type="text"  name="lng" placeholder="lng" required="required">
+			</div>
+	       <div class="form-group">
+			   <label for="addr">Address </label>
+                    <input class="form-control" id="addr" type="text"  name="addr" placeholder="Street" ><br>
+                    <input class="form-control" type="text"  name="pin" placeholder="pin" ><br>
+		   </div>
+            <div class="form-group">
+				<label for="key_words">Keywords</label>
+				    <input class="form-control" id="key_words" type="text"  name="key_words" placeholder="keywords" required="required">
+			</div>
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+        {{msg}}
+    </form>
+</div>
+</center>
+{% endblock %}
